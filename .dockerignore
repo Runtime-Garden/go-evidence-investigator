@@ -1,0 +1,14 @@
+.git
+.env
+.env.*
+!.env.example
+state
+*.zip
+*.log
+benchmark-*.jsonl
+benchmarks/
+docs/
+.github/
+scripts/
+README.md
+LICENSE

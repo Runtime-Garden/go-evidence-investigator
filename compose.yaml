@@ -1,0 +1,41 @@
+# Runtime Garden: extract into /opt/stacks/evidence-investigator
+# Only NGINX Proxy Manager should be publicly listening on host ports.
+services:
+  evidence-investigator:
+    build: .
+    image: runtimegarden/evidence-investigator:1.3.2-rc1
+    restart: unless-stopped
+    env_file: [.env]
+    environment:
+      LISTEN_ADDR: ":8080"
+      DATA_DIR: /data/demo
+      CASE_DIR: /state
+    volumes:
+      - ./data:/data:ro
+      - case_state:/state
+    networks:
+      proxy:
+        aliases:
+          - evidence-investigator-runtimegarden
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    pids_limit: 128
+    mem_limit: 512m
+    cpus: 1.0
+    stop_grace_period: 15s
+    healthcheck:
+      test: ["CMD", "/app", "-mode=healthcheck"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+    # No ports! NPM routes through the external 'proxy' network.
+volumes:
+  case_state:
+networks:
+  proxy:
+    external: true

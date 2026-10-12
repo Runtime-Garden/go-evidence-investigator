@@ -1,0 +1,6 @@
+.env
+/state/
+/benchmark-details.jsonl
+/benchmarks/
+/data/scifact/
+*.log

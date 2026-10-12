@@ -1,0 +1,5 @@
+{"id":1,"claim":"In a simulated greenhouse, lower temperatures reduced tomato fruit yield.","evidence":{"100001":[{"label":"SUPPORT","sentences":[0,1]}]}}
+{"id":2,"claim":"Greater urban tree canopy coverage was associated with lower daytime surface temperatures.","evidence":{"100002":[{"label":"SUPPORT","sentences":[0]}]}}
+{"id":3,"claim":"A simulated lithium battery experienced faster capacity loss at elevated temperature.","evidence":{"100003":[{"label":"SUPPORT","sentences":[0]}]}}
+{"id":4,"claim":"Synthetic coastal stations had more winter rainfall than inland stations.","evidence":{"100004":[{"label":"SUPPORT","sentences":[0]}]}}
+{"id":5,"claim":"Increasing ventilation decreased harmless tracer gas concentration in a simulated office.","evidence":{"100005":[{"label":"SUPPORT","sentences":[0]}]}}

@@ -1,0 +1,26 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      GOPROXY: "off"
+      GOSUMDB: "off"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+          cache: true
+      - name: Go test
+        run: go test -race ./...
+      - name: Go vet
+        run: go vet ./...
+      - name: Go build
+        run: go build -trimpath ./cmd/evidence-investigator
+      - name: Synthetic retrieval smoke
+        run: go run ./cmd/evidence-investigator -mode=eval -data=data/demo -k=5

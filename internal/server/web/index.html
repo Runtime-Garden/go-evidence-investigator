@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Evidence Investigator: an evidence-first research prototype from Runtime Garden.">
+  <title>Evidence Investigator · Runtime Garden</title>
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="wordmark" href="https://runtimegarden.com" rel="noreferrer" target="_blank"><span class="mark">&gt;_</span> runtime garden<span class="leaf">•</span></a>
+      <div class="topright">LAB / 001 <span class="separator">/</span> PEER AGENTS v1.3 CANDIDATE</div>
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow"><span class="dot"></span> EVIDENCE ENGINEERING / RESEARCH TOOL</p>
+        <h1 id="page-title">Investigate the claim.<br><em>Follow the evidence.</em></h1>
+        <p class="subtitle">An experimental evidence retrieval system that traces scientific claims back to exact source passages. Designed for researchers, built for verification.</p>
+      </section>
+      <section class="auth-panel" aria-label="API access">
+        <label for="api-token">PRIVATE API ACCESS TOKEN (in-memory only; never stored in the browser)</label>
+        <input type="password" id="api-token" autocomplete="off" placeholder="Bearer token (leave blank only for local demo)">
+        <button type="button" id="connect">Connect / refresh data</button>
+        <span class="muted" id="auth-status" role="status"></span>
+      </section>
+      <section class="workbench" aria-label="Investigation workbench">
+        <div class="section-head"><h2>New investigation</h2><span id="dataset" class="muted">Loading corpus…</span></div>
+        <form id="investigate-form">
+          <label for="claim">CLAIM TO INVESTIGATE</label>
+          <textarea id="claim" rows="4" maxlength="1000" required minlength="5" placeholder="Enter a testable scientific claim…"></textarea>
+          <div class="options">
+            <div><label for="sample">TRY A DATASET CLAIM</label><select id="sample"><option value="">Choose an example</option></select></div>
+            <div><label for="topk">EVIDENCE PASSAGES</label><select id="topk"><option>3</option><option selected>5</option><option>10</option></select></div>
+          </div>
+          <div class="action-row"><div><label class="checkbox"><input id="use-model" type="checkbox" disabled> Legacy LLM assessment</label>
+            <label class="checkbox"><input id="use-jev" type="checkbox" disabled> JEV decision → LLM report</label>
+            <label class="checkbox"><input id="use-agents" type="checkbox" disabled> Autonomous multi-agent + JEV</label></div><button type="submit" id="submit">Find evidence <span aria-hidden="true">↗</span></button></div>
+        </form>
+      </section>
+      <section id="results" class="results hidden" aria-live="polite">
+        <div class="section-head"><h2>Investigation report</h2><span id="timing" class="muted"></span></div>
+        <div class="report-summary"><span class="small-label">ASSESSMENT</span><h3 id="verdict">NOT ASSESSED</h3><p id="notice"></p><p id="interpretation"></p><p class="muted" id="jev-details"></p><p class="muted" id="agent-details"></p></div>
+        <section id="review-panel" class="review-panel hidden" aria-label="Human review">
+          <p class="small-label">CASE REVIEW · <span id="case-id"></span></p>
+          <p id="review-status">Waiting for reviewer</p>
+          <label for="reviewer">REVIEWER TOKEN</label><input type="password" id="reviewer" autocomplete="off" placeholder="Separate review secret">
+          <label for="review-note">REVIEW NOTE</label><textarea id="review-note" rows="2" maxlength="2000" placeholder="Reason for this disposition"></textarea>
+          <div class="buttons"><button type="button" data-review="approved">Approve</button><button type="button" data-review="rejected">Reject</button><button type="button" data-review="needs_more_evidence">Need more evidence</button></div>
+        </section>
+        <div class="section-head evidence-heading"><h3>Source passages</h3><span id="count" class="muted"></span></div>
+        <div id="passages"></div>
+      </section>
+      <p id="error" class="error hidden" role="alert"></p>
+      <section class="methodology"><div><p class="small-label">01 / RETRIEVE</p><p>Rank abstract sentences with lexical BM25. Ranking is not truth assessment.</p></div><div><p class="small-label">02 / TRACE</p><p>Show document ID, sentence index, verbatim quote and SHA-256 checksum.</p></div><div><p class="small-label">03 / REVIEW</p><p>JEV chooses a typed provisional decision, Go checks safety thresholds, and a final LLM explains without changing the verdict. Human review is still required.</p></div></section>
+    </main>
+    <footer><span>RUNTIME GARDEN <span class="muted">/ Where ideas grow into systems.</span></span><span>DATA IS RESEARCH MATERIAL, NOT MEDICAL ADVICE</span></footer>
+  </div>
+</body>
+</html>
