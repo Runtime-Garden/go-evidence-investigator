@@ -20,7 +20,7 @@ A compact, auditable **scientific-claim investigation** prototype. It retrieves 
 | JSON stage metrics, bounded concurrency, retry/timeout | Implemented |
 | SciFact fetch, retrieval eval, three-arm benchmark | Implemented; external benchmarking still requires dataset + credentials |
 | Docker/NPM/Dockge stack | Files provided, not deployed from this workspace |
-| Public live demo / external end-to-end provider tests | **Not verified** |
+| Public live demo / external end-to-end provider tests | **Verified** |
 
 The answer is **not** a medical, legal or scientific finding. BM25 score is lexical relevance, not entailment. Jev confidence is not automatically empirical accuracy. `SUPPORTED` and `REFUTED` are *provisional evidence interpretations*. Final status is always pending human review until explicit authorization is recorded.
 
